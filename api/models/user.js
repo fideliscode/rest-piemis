@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
         skills: {type:[String]},
         location: {type:String},
         Institution: {type:String},
-        dob:{type:Date}}
+        dob:{type:Date},required:false}
 
   },
    {timestamps: true});

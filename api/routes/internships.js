@@ -5,7 +5,6 @@ const User = require('../models/user');
 const Internship = require('../models/internship');
 
 
-
 router.post('/', (req, res, next)=>{
  //extracting request body to the create an internship
  const internship = new Internship({
@@ -27,7 +26,7 @@ router.post('/', (req, res, next)=>{
  internship.save()
    .then( result => {
 	    console.log(result);
-	    res.status(200).json({internship:internship});
+	    res.status(200).json({internship:internship, message:"success"});
 	    })
    .catch(err=>{
 	    console.log(err.message);

@@ -9,6 +9,12 @@ mongoose.connect('mongodb+srv://fideliscode:piemispassword@cluster0-9jilr.mongod
     useNewUrlParser: true
 }).then(result=>console.log('connected')).catch(err=>console.log('cannot connect'));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 const internshipRoutes = require('./api/routes/internships');
 const usersRoutes = require('./api/routes/users');
 
