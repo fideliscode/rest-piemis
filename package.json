@@ -14,6 +14,7 @@
   "author": "Mapendo fidelis, Mhondo hellen",
   "license": "ISC",
   "dependencies": {
+    "connect-multiparty": "^2.2.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.19",
     "mongoose-unique-validator": "^2.0.2",

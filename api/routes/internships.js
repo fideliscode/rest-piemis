@@ -1,14 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const multipart = require('connect-multiparty');
+const multipartMIddleware = multipart({uploadDir: './uploads'}); 
 const User = require('../models/user');
 const Internship = require('../models/internship');
 
+app.post('/upload', multipartMiddleware, (req, res) => {  
+    res.json({
+        'message': 'File uploaded successfully'
+    });
+});
 
 router.post('/', (req, res, next)=>{
  //extracting request body to the create an internship
  const internship = new Internship({
-	name:req.body.name,
+	internshipPositon:req.body.internshipPositon,
     description:req.body.description,
     internshipfile:req.body.internshipfile,
     professional:req.body.professional,
@@ -17,7 +24,6 @@ router.post('/', (req, res, next)=>{
     tags:req.body.tags,
     chats:req.body.chats, 
 	isPublished:req.body.isPublished,
-	internshipPositon:req.body.internshipPositon,
     internshipfunction: req.body.internshipfunction,
     
 
