@@ -14,15 +14,18 @@ const userSchema = mongoose.Schema({
         skills: {type:[String]},
         location: {type:String},
         Institution: {type:String},
-        dob:{type:Date}
+        dob:{type:Date},
+        rates:[{internshipId:String,rate:Number}],
       },
-    company:{                            //required
-     name:{type:String},
+      
+     company:{                            
+     companyName:{type:String},
      logo:{type:String},
+     noEmployees:{name:String,subcategory:[String]},
      industryType:{type:String},
      website:{type:String},
      address:{type:String},
-     country:{type:String}
+     region:{type:String}
     },
 
   },

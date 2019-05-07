@@ -8,6 +8,7 @@ const internshipSchema = mongoose.Schema({
     internshipfunction: {type:String},//required
     internshipfile:[{path:String,filetype:String}],
     description:{type:String}, //required
+    rating:[Number],
     professional:{                            //required
         type:mongoose.Schema.Types.ObjectId, 
         ref:'User'

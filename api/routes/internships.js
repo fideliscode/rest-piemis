@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multipart = require('connect-multiparty');
-const multipartMIddleware = multipart({uploadDir: './uploads'}); 
+const multipartMiddleware = multipart({uploadDir: './uploads'}); 
 const User = require('../models/user');
 const Internship = require('../models/internship');
 
-app.post('/upload', multipartMiddleware, (req, res) => {  
+router.post('/upload', multipartMiddleware, (req, res) => {  
     res.json({
         'message': 'File uploaded successfully'
     });
