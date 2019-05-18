@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 
-
 const internshipSchema = mongoose.Schema({
     
-    internshipPositon: {type:String},//required
-    internshipfunction: {type:String},//required
+    internshipPosition: {type:String},//required
+    description: {type:String},//required
     internshipfile:[{path:String,filetype:String}],
-    description:{type:String}, //required
+    qualifications:{type:String}, //required
     rating:[Number],
     professional:{                            //required
         type:mongoose.Schema.Types.ObjectId, 

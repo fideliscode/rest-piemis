@@ -15,7 +15,7 @@ router.post('/upload', multipartMiddleware, (req, res) => {
 router.post('/', (req, res, next)=>{
  //extracting request body to the create an internship
  const internship = new Internship({
-	internshipPositon:req.body.internshipPositon,
+	internshipPosition:req.body.internshipPosition,
     description:req.body.description,
     internshipfile:req.body.internshipfile,
     professional:req.body.professional,
@@ -24,7 +24,7 @@ router.post('/', (req, res, next)=>{
     tags:req.body.tags,
     chats:req.body.chats, 
 	isPublished:req.body.isPublished,
-    internshipfunction: req.body.internshipfunction,
+    qualifications: req.body.qualifications,
     
 
  });
