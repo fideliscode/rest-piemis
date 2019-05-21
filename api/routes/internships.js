@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart({uploadDir: './uploads'}); 
+const multipartMiddleware = multipart({uploadDir: './uploads'});
 const User = require('../models/user');
 const Internship = require('../models/internship');
 
-router.post('/upload', multipartMiddleware, (req, res) => {  
+router.post('/upload', multipartMiddleware, (req, res) => {
     res.json({
         'message': 'File uploaded successfully'
     });
@@ -15,17 +15,17 @@ router.post('/upload', multipartMiddleware, (req, res) => {
 router.post('/', (req, res, next)=>{
  //extracting request body to the create an internship
  const internship = new Internship({
-	internshipPositon:req.body.internshipPositon,
+	internshipPosition:req.body.internshipPosition,
     description:req.body.description,
     internshipfile:req.body.internshipfile,
     professional:req.body.professional,
     interns:req.body.interns,
     category:req.body.category,
     tags:req.body.tags,
-    chats:req.body.chats, 
+    chats:req.body.chats,
 	isPublished:req.body.isPublished,
-    internshipfunction: req.body.internshipfunction,
-    
+    qualifications: req.body.qualifications,
+
 
  });
  //saving intership to the database
@@ -55,7 +55,7 @@ router.get('/', (req, res, next)=>{
 	   res.status(200).json({error: err})});
 });
 
-//retrieving an intership from the database
+//retrieving an internship from the database
 router.get('/:internshipid', (req, res, next)=>{
    const id = req.params.internshipid;
    Internship.findById(id)
@@ -67,7 +67,7 @@ router.get('/:internshipid', (req, res, next)=>{
 		}else{
 			res.status(404).json("no intership with that id")
 		}
-	    
+
        })
    .catch(err=>{
 	   console.log(err);
@@ -80,7 +80,7 @@ router.put('/:internshipid', (req, res, next)=>{
 	Internship.findOneAndUpdate({_id: id}, req.body)
 	.exec()
 	.then(result=>{
-		console.log(result); 
+		console.log(result);
 		if(result){
 			res.status(200).json("item updated!")}
 		else{
@@ -95,17 +95,15 @@ router.delete('/:internshipid', (req, res, next)=>{
 	Internship.findByIdAndDelete({_id: id})
 	.exec()
 	.then(result=>{
-		console.log(result); 
+		console.log(result);
 		if(result){
 			res.status(200).json("item deleted!")}
 		else{
-			res.status(404).json("there is no intership with that id");
+			res.status(404).json("there is no internship with that id");
 		}
 		})
 	.catch(err =>{
-		console.log(err.messsage);
+		console.log(err.message);
 		res.status.json({error: err});});
 });
 module.exports= router;
-
-
