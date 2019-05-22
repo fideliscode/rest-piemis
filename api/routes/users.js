@@ -59,15 +59,16 @@ User.find({email:req.body.email})
 .exec()
 .then(user => {
   if (user.length>=1){
-    return res.status(409).json({
-      message : "user exists"
-    });
-  } else {  bcrypt.hash(req.body.password,10 ,(err,hash)=>{
+    return res.status(409).json({ message : "user exists" });
+  }
+  else {
+    bcrypt.hash(req.body.password,10 ,(err,hash)=>{
       if (err){
         return res.status(500).json({
           error:err
         });
-      }else{
+      }
+      else{
       const user = new User({
           fname:req.body.fname,
           lname:req.body.lname,
@@ -77,32 +78,15 @@ User.find({email:req.body.email})
           role:req.body.role,
           profile:req.body.profile,
           company:req.body.company
-
-});
-
-user
-.save()
-
-.then(result=>{
-  console.log(result);
-  res.status(201).json({
-    message:"user created"
-
+        });
+     user.save()
+     .then(result=>{console.log(result); res.status(201).json({message:"user created" });})
+     .catch(err=>{console.log(err); res.status(500).json({ message:err.message });});
+     }
   });
+  }
 })
-
-.catch(err=>{
-  console.log(err);
-  res.status(500).json({
-    error:err
-  });
-});
-}
-});
- }
-<<<<<<< HEAD
-});
-
+.catch( err=>{ return res.status(500).json({message:err.message});});
 });
 
 router.post('/login', (req, res,next) => {
