@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require ('bcrypt');
-
+const dotenv = require('dotenv');
+dotenv.config();
 
 router.get('/', (req, res, next)=>{
  User.find()
@@ -34,11 +35,11 @@ router.get('/interns', (req, res, next)=>{
     })
    .catch(err=>{
        console.log(err.message);
-       res.status(200).json({error: err})});
+       res.status(200).json({message: err.message})});
 });
 
 //returns all the professionals
-router.get('/professional', (req, res, next)=>{
+router.get('/professionals', (req, res, next)=>{
  User.find({"role":"professional"})
    .exec()
    .then(docs =>{
@@ -50,7 +51,7 @@ router.get('/professional', (req, res, next)=>{
     })
    .catch(err=>{
        console.log(err.message);
-       res.status(200).json({error: err})});
+       res.status(200).json({message: err.message})});
 });
 
 
