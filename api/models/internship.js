@@ -2,18 +2,18 @@
 
 
 const internshipSchema = mongoose.Schema({
-    
+
     internshipPosition: {type:String},//required
     description: {type:String},//required
     internshipfile:[{path:String,filetype:String}],
     qualifications:{type:String}, //required
     rating:[Number],
     professional:{                            //required
-        type:mongoose.Schema.Types.ObjectId, 
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
     interns:[{
-        type:mongoose.Schema.Types.ObjectId, 
+        type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     }],
     category:{                      //required
@@ -26,10 +26,10 @@ const internshipSchema = mongoose.Schema({
         body:{type:String},
         //order:{type:Number},
         time : { type : Date, default: Date.now }
-        
+
     }],
     isPublished:{
-        type:Boolean, 
+        type:Boolean,
         default:false,
     }
 }, {timestamps:true});
