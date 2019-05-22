@@ -70,6 +70,7 @@ User.find({email:req.body.email})
       }
       else{
       const user = new User({
+        _id:mongoose.Schema.Types.ObjectId,
           fname:req.body.fname,
           lname:req.body.lname,
           email:req.body.email,
