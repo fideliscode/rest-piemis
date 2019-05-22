@@ -26,6 +26,6 @@
     "node": "10.14.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "node": "^1.18.10"
   }
 }
