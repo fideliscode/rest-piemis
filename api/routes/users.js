@@ -64,13 +64,11 @@ User.find({email:req.body.email})
   else {
     bcrypt.hash(req.body.password,10 ,(err,hash)=>{
       if (err){
-        return res.status(500).json({
-          error:err
-        });
+        return res.status(500).json({ message:err.message});
       }
       else{
       const user = new User({
-        _id:mongoose.Schema.Types.ObjectId,
+          _id: new mongoose.Types.ObjectId(),
           fname:req.body.fname,
           lname:req.body.lname,
           email:req.body.email,
@@ -89,6 +87,7 @@ User.find({email:req.body.email})
 })
 .catch( err=>{ return res.status(500).json({message:err.message});});
 });
+
 
 router.post('/login', (req, res,next) => {
   User.find({email: req.body.email})
@@ -115,58 +114,6 @@ router.post('/login', (req, res,next) => {
     .catch(err=>{
        console.log(err.message);
        res.status(500).json({ message : err.message});
-     });
-});
-
-
-
-router.post('/login', (req, res,next) => {
-  User.find({email: req.body.email})
-    .exec()
-    .then(user=> {
-      if (user.length < 1){
-
-        return res.status(401).json({
-          message: 'incorrectEmail'
-        });
-      }
-      bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
-    if (err){
-
-       return res.status(401).json({
-        message: 'incorrectPassword'
-      });
-    }
-    if (result){
-    const token = jwt.sign(
-      {
-        email:user[0].email,
-        userid:user[0]._id
-      },
-      process.emv.JWT_KEY,
-      {
-        expiresIn:"1h"
-      }
-    );
-      return res.status(200).json({
-
-        message:'successful ',
-        user:user,
-        token:token,
-
-      });
-    }
-    res.status(401).json({
-
-      message: 'mismatch'
-    });
-      });
-    })
-    .catch(err=>{
-       console.log(err);
-       res.status(500).json({
-         error : err
-       });
      });
 });
 
