@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 
 
-
-
 const userSchema = mongoose.Schema({
-
-    _id:mongoose.Schema.Types.ObjectId,
+  _id:mongoose.Schema.Types.ObjectIdnode,
     fname:{type:String,required:true},
     lname:{type:String,required:true},
     email:{type:String,required:true},
@@ -21,8 +18,8 @@ const userSchema = mongoose.Schema({
         dob:{type:Date},
         rates:[{internshipId:String,rate:Number}],
       },
-
-     company:{
+      
+     company:{                            
      companyName:{type:String},
      logo:{type:String},
      noEmployees:{name:String,subcategory:[String]},
@@ -34,5 +31,5 @@ const userSchema = mongoose.Schema({
 
   },
    {timestamps: true});
-
+   
    module.exports = mongoose.model('User', userSchema);

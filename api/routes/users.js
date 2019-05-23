@@ -100,10 +100,11 @@ router.post('/login', (req, res,next) => {
       else{
          bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
            if (err){
-              return res.status(401).json({ message: err.message});
+              return res.status(401).json({ message: 'incorrectPassword'});
            }
            if (result){
-              const token = jwt.sign({email:user[0].email,userid:user[0]._id},process.env.JWT_KEY,{expiresIn:"1h"});
+             console.log(process.env.JWT_KEY);
+              const token = jwt.sign({email:user[0].email,userid:user[0]._id}, process.env.JWT_KEY,{expiresIn:"1h"});
               return res.status(200).json({ message:'successful ', user:user, token:token, });
            }
            else{
@@ -113,8 +114,7 @@ router.post('/login', (req, res,next) => {
       }
     })
     .catch(err=>{
-       console.log(err.message);
-       res.status(500).json({ message : err.message});
+       res.status(500).json({ message : 'serverError'});
      });
 });
 
