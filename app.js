@@ -6,7 +6,6 @@ const multipart = require('connect-multiparty');
 const multipartMIddleware = multipart({uploadDir: './uploads'});
 const internshipRoutes = require('./api/routes/internships');
 const usersRoutes = require('./api/routes/users');
-// const consumer = 'http:127.0.0.1:4200';
 const consumer1='https://angular-piemis.herokuapp.com';
 const consumer2 = 'http://localhost:4200';
 const dburl = 'mongodb+srv://fideliscode:piemispassword@cluster0-9jilr.mongodb.net/test?retryWrites=true';
@@ -20,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "consumer2");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", " POST, GET, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
