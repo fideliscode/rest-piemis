@@ -103,9 +103,10 @@ router.post('/login', (req, res,next) => {
               return res.status(401).json({ message: 'incorrectPassword'});
            }
            if (result){
-              const token = jwt.sign({email:user[0].email,userid:user[0]._id},"badPractice",{expiresIn:"1h"});
+              const token = jwt.sign({email:user[0].email,userid:user[0]._id},
+                "badPractice",{expiresIn:"6h"});
 
-              return res.status(200).json({ message:'successful ', user:user, token:token, });
+              return res.status(200).json({ message:'successful ', user:user, token:token});
            }
            else{
             return res.status(401).json({ message: 'mismatch' });

@@ -39,13 +39,29 @@ router.post('/', (req, res, next)=>{
 	    res.status(500).json({error:err});
 	    });
 });
+
+
+
+
+
+// Internship.find()
+// .populate('User', 'company.companyName'). // only return the Persons name
+//   exec(function (err, story) {
+//     if (err) return handleError(err);
+
+//     console.log('The author is %s', .author.name);
+//     // prints "The author is Ian Fleming"
+
+//     console.log('The authors age is %s', story.author.age);
+//     // prints "The authors age is null'
+//   });
 //retrieve all internships
 router.get('/', (req, res, next)=>{
- Internship.find()
-   .exec()
-   .then(docs =>{
+ Internship.find().populate('User').exec().then(docs =>{
 	   if(docs){
-		   res.status(200).json(docs);
+      console.log(docs[0].professional);
+      console.log(docs[1].professional);
+		   res.status(200).json(docs[2].professional);
 		}else{
 			res.status().json("there are no registered internships yet");
 		}

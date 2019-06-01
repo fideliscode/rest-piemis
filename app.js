@@ -25,6 +25,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 app.use('/users', usersRoutes);
 app.use('/internships', internshipRoutes);
 
