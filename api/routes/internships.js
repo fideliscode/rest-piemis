@@ -57,11 +57,9 @@ router.post('/', (req, res, next)=>{
 //   });
 //retrieve all internships
 router.get('/', (req, res, next)=>{
- Internship.find().populate('User').exec().then(docs =>{
+ Internship.find().populate('professional').exec().then(docs =>{
 	   if(docs){
-      console.log(docs[0].professional);
-      console.log(docs[1].professional);
-		   res.status(200).json(docs[2].professional);
+		   res.status(200).json(docs[3]);
 		}else{
 			res.status().json("there are no registered internships yet");
 		}
