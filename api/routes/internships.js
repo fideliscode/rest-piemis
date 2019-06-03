@@ -59,7 +59,7 @@ router.post('/', (req, res, next)=>{
 router.get('/', (req, res, next)=>{
  Internship.find().populate('professional').exec().then(docs =>{
 	   if(docs){
-		   res.status(200).json(docs[3]);
+		   res.status(200).json(docs);
 		}else{
 			res.status().json("there are no registered internships yet");
 		}
