@@ -15,13 +15,11 @@ const userSchema = mongoose.Schema({
   isVerified: { type: Boolean, default: false },
   passwordResetToken: String,
   passwordResetExpires: Date,
-
-
-
-
+  
     phone:{type:String,default:''},
     role:{type:String,required:true},
     profile:{
+        Profession:{type:String},
         bio:{type:String},
         image: {type:String},
         skills: {type:[String]},
