@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const UserToken = require('../models/token');
-const thehost = 'localhost:4200';
+//const thehost = 'localhost:4200';
+const thehost = 'https://angular-piemis.herokuapp.com';
 
 
 exports.confirmationPost = function (req, res, next) {

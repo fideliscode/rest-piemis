@@ -13,7 +13,8 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 dotenv.config();
 
-const thehost = 'localhost:4200';
+//const thehost = 'localhost:4200';
+const thehost = 'https://angular-piemis.herokuapp.com';
 
 
 
