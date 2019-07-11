@@ -18,17 +18,14 @@ const userSchema = mongoose.Schema({
   
     phone:{type:String,default:''},
     role:{type:String,required:true},
-    profile:{
-        Profession:{type:String},
-        bio:{type:String},
+    bio:{type:String},
         image: {type:String},
-        skills: {type:[String]},
+        skills: {type:String},
         location: {type:String},
         Institution: {type:String},
         dob:{type:Date},
         rates:[{internshipId:String,rate:Number}],
-      },
-      
+   
      company:{                            
      companyName:{type:String},
      logo:{type:String},

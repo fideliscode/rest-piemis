@@ -47,7 +47,7 @@ router.post('/',upload.single('internshipfile'), (req, res, next)=>{
     // interns:req.body.interns,
     vacancy:req.body.vacancy,
     subcategory:req.body.subcategory,
-    tags:req.body.tags,
+    tags:[req.body.tag1,req.body.tag2,req.body.tag3],
     // chats:req.body.chats,
 	isPublished:req.body.isPublished,
     qualifications: req.body.qualifications,
@@ -67,25 +67,74 @@ router.post('/',upload.single('internshipfile'), (req, res, next)=>{
 	    });
 });
 
+ 
+//search by by text
+router.get('/internships/text/:search', (req, res, next)=>{
+	 const regex = new RegExp(escapeRegex(req.params.search), 'gi');
+	// const search = req.params.search;
+ Internship.find({internshipPosition:regex, isPublished:"PUBLISHED"})
+ .populate('professional')
+ .exec().then(docs =>{
+ 	if(docs.length > 0){
+			
+               res.status(200).json({search:docs, msg:"success"});
+	   
+		}else{
+			res.status(200).json({search:docs,msg:"no internships"});
+		}
+	})
+   .catch(err=>{
+	   // console.log(err.message);
+	   res.status(200).json({msg: err.message})});
+});
+
+
+
+//search by category
+router.get('/internships/:search', (req, res, next)=>{
+	const search = req.params.search;
+ Internship.find({subcategory:search,isPublished:"PUBLISHED"})
+ .populate('professional')
+ .exec().then(docs =>{
+ 	if(docs.length > 0){
+			
+               res.status(200).json({search:docs, msg:"success"});
+	   
+		}else{
+			res.status(200).json({search:docs,msg:"no internships"});
+		}
+	})
+   .catch(err=>{
+	   // console.log(err.message);
+	   res.status(200).json({msg: err.message})});
+});
 
 
 
 
-// Internship.find()
-// .populate('User', 'company.companyName'). // only return the Persons name
-//   exec(function (err, story) {
-//     if (err) return handleError(err);
-
-//     console.log('The author is %s', .author.name);
-//     // prints "The author is Ian Fleming"
-
-//     console.log('The authors age is %s', story.author.age);
-//     // prints "The authors age is null'
-//   });
-//retrieve all internships
-router.get('/', (req, res, next)=>{
+//get all published  and unpublished internships
+router.get('/pro', (req, res, next)=>{
  Internship
  .find()
+ // .select("_id internshipfile professional updatedAt internshipPosition ")
+ .populate('professional')
+ .exec().then(docs =>{
+	   if(docs){
+		   res.status(200).json(docs);
+		}else{
+			res.status().json("there are no registered internships yet");
+		}
+	})
+   .catch(err=>{
+	   console.log(err.message);
+	   res.status(200).json({error: err})});
+});
+
+
+//get all published internships
+router.get('/', (req, res, next)=>{
+ Internship
+ .find({isPublished:"PUBLISHED"})
  // .select("_id internshipfile professional updatedAt internshipPosition ")
  .populate('professional')
  .exec().then(docs =>{
@@ -128,14 +177,15 @@ router.put('/:internshipid', (req, res, next)=>{
 	.then(result=>{
 		console.log(result);
 		if(result){
-			res.status(200).json("request sent")}
-		else{
-			res.status(404).json("there is no intership with that id");
+			res.status(200).json({internship:result, msg:"updated"});
+		}else{
+			res.status(200).json({internship:null,msg:"there is no intership with that id"});
 		}
 		})
-		.catch(err =>{console.log(err.messsage);res.status(404).json({error: err.message});});
+		.catch(err =>{
+			console.log(err.messsage);res.status(404).json({internship:null,msg:err.message});
 });
-
+});
 
 //Deleting a specific internship
 router.delete('/:internshipid', (req, res, next)=>{
@@ -198,4 +248,7 @@ router.get('/review', (req, res, next)=>{
 	   res.status(200).json({error: err})});
 });
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 module.exports= router;

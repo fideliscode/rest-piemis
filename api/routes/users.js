@@ -13,6 +13,7 @@ dotenv.config();
 //const thehost = 'localhost:4200';
 const thehost = 'https://angular-piemis.herokuapp.com';
 
+
 //get all users
 router.get('/', (req, res, next)=>{
  User.find()
@@ -83,9 +84,17 @@ User.find({email:req.body.email})
           email:req.body.email,
           password:hash,
           phone:req.body.phone,
-          role:req.body.role,
-          profile:req.body.profile,
-          company:req.body.company
+        
+        
+          company:req.body.company,
+
+role:req.body.role,
+          bio:req.body.bio,
+          image:req.body.image,
+          skills:req.body.skills,
+          location:req.body.location,
+          Institution:req.body.Institution
+
         });
      // Save the user
      user.save()
@@ -200,7 +209,7 @@ router.get('/:userid', (req, res, next)=>{
 //update user information
 router.put('/:userid', (req, res, next)=>{
   const id = req.params.userid;
-  User.findOneAndUpdate({_id: id}, req.body)
+  User.findOneAndUpdate({_id: id}, req.body,{new: true})
   .exec()
   .then(result=>{
     if(result){
@@ -234,5 +243,9 @@ router.delete('/:userid', (req, res, next)=>{
     return res.status.json({error: err.message});
   });
 });
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports= router;

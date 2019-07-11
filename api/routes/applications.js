@@ -13,8 +13,8 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 dotenv.config();
 
-//const thehost = 'localhost:4200';
-const thehost = 'https://angular-piemis.herokuapp.com';
+const thehost = 'localhost:4200';
+//const thehost = 'https://angular-piemis.herokuapp.com';
 
 
 
@@ -83,7 +83,7 @@ router.get('/', (req, res, next)=>{
 	   res.status(200).json({error: err})});
 });
 
-
+//get applications belonging to single company
 router.get('/notifications/:id', (req, res, next)=>{
 	const id = req.params.id;
  Application.find({status:"pending", professional: id})

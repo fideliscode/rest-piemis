@@ -11,7 +11,7 @@ const usersRoutes = require('./api/routes/users');
 // const consumer1='https://angular-piemis.herokuapp.com';
 // const consumer2 = 'http://localhost:4200';
 const dburl = 'mongodb+srv://fideliscode:piemispassword@cluster0-9jilr.mongodb.net/test?retryWrites=true';
-// const dburl = "mongodb://localhost:27017/uniinterndb"; 
+//const dburl = "mongodb://localhost:27017/uniinterndb"; 
 //connecting to Mongodb atlas or local mongodb
 mongoose.connect(dburl,{ useNewUrlParser: true,useFindAndModify: false})
 .then(result=>console.log('connected'))
