@@ -8,10 +8,15 @@ const internshipRoutes = require('./api/routes/internships');
 const applicationRoutes = require('./api/routes/applications');
 const tokenController =require('./api/controllers/tokenController');
 const usersRoutes = require('./api/routes/users');
+const dotenv = require('dotenv');
+dotenv.config();
 // const consumer1='https://angular-piemis.herokuapp.com';
 // const consumer2 = 'http://localhost:4200';
-const dburl = 'mongodb+srv://fideliscode:piemispassword@cluster0-9jilr.mongodb.net/test?retryWrites=true';
-//const dburl = "mongodb://localhost:27017/uniinterndb"; 
+//dburl = "mongodb://localhost:27017/uniinterndb"; 
+//const dburl = 'mongodb+srv://fideliscode:piemispassword@cluster0-9jilr.mongodb.net/test?retryWrites=true';
+
+const dburl =process.env.dburl1;
+
 //connecting to Mongodb atlas or local mongodb
 mongoose.connect(dburl,{ useNewUrlParser: true,useFindAndModify: false})
 .then(result=>console.log('connected'))

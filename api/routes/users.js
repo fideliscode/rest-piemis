@@ -11,7 +11,7 @@ var nodemailer = require('nodemailer');
 dotenv.config();
 
 //const thehost = 'localhost:4200';
-const thehost = 'https://angular-piemis.herokuapp.com';
+const thehost=process.env.URL1;
 
 
 //get all users

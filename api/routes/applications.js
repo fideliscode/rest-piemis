@@ -13,17 +13,8 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 dotenv.config();
 
-const thehost = 'localhost:4200';
+const thehost=process.env.URL1;
 //const thehost = 'https://angular-piemis.herokuapp.com';
-
-
-
-
-
-
-
- 
-
  //Posting an apliction to the internship
 router.post('/', (req,res,next)=>{
 
